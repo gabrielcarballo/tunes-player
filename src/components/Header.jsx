@@ -34,9 +34,29 @@ class Header extends Component {
         ) : (
           <h4 data-testid="header-user-name">{ username.name }</h4>
         )}
-        <Link to="/search" data-testid="link-to-search" />
-        <Link to="/favorites" data-testid="link-to-favorites" />
-        <Link to="/profile" data-testid="link-to-profile" />
+        <nav>
+          <p>
+            Pesquisa
+            <Link
+              to="/search"
+              data-testid="link-to-search"
+            />
+          </p>
+          <p>
+            Favoritos
+            <Link
+              to="/favorites"
+              data-testid="link-to-favorites"
+            />
+          </p>
+          <p>
+            Perfil
+            <Link
+              to="/profile"
+              data-testid="link-to-profile"
+            />
+          </p>
+        </nav>
       </header>
     );
   }
