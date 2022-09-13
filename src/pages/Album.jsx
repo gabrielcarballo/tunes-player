@@ -32,7 +32,6 @@ class Album extends Component {
       loading: true,
     });
     const test = await getFavoriteSongs(song);
-    console.log(test);
     await addSong(song);
     this.setState({
       loading: false,
