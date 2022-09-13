@@ -12,7 +12,7 @@ class Search extends Component {
     albumFetched: '',
   };
 
-  handleSeachState = (event) => {
+  handleSearchState = (event) => {
     const { target: { value } } = event;
     this.setState({
       searchState: value,
@@ -48,7 +48,7 @@ class Search extends Component {
               data-testid="search-artist-input"
               value={ searchState }
               name="search"
-              onChange={ this.handleSeachState }
+              onChange={ this.handleSearchState }
             />
             <button
               type="submit"
