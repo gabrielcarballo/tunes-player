@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class MusicCard extends Component {
   render() {
-    const { song } = this.props;
+    const { song, favoritedSongs, gettingList } = this.props;
 
     return (
       <div>
@@ -22,6 +22,14 @@ class MusicCard extends Component {
             audio
           </code>
         </audio>
+        <label htmlFor="fav-button">
+          <input
+            type="checkbox"
+            data-testid={ `checkbox-music-${song.trackId}` }
+            onClick={ () => favoritedSongs(song) }
+          />
+          Favorita
+        </label>
       </div>
     );
   }
