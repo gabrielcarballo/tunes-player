@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import { getFavoriteSongs, addSong, removeSong} from '../services/favoriteSongsAPI';
+import { /* getFavoriteSongs */ addSong } from '../services/favoriteSongsAPI';
+import Loading from '../components/Loading';
 
 class Album extends Component {
   state = {
     songList: [],
     songInfo: [],
     favoritedSongs: [],
+    loading: false,
   };
 
   async componentDidMount() {
@@ -24,22 +26,17 @@ class Album extends Component {
   }
 
   favoriteSongs = async (song) => {
-    const { favoritedSongs } = this.state;
-    const favoritedList = await getFavoriteSongs();
-    if (favoritedSongs.includes(song)) {
-      (await removeSong(song));
-      console.log('foi');
-    } else {
-      (await addSong(song));
-      console.log('foi 1');
-    }
     this.setState({
-      favoritedSongs: favoritedList,
+      loading: true,
+    });
+    await addSong(song);
+    this.setState({
+      loading: false,
     });
   };
 
   render() {
-    const { songInfo, songList, favoritedSongs } = this.state;
+    const { songInfo, songList, favoritedSongs, loading } = this.state;
 
     return (
       <div data-testid="page-album">
@@ -48,12 +45,13 @@ class Album extends Component {
         <h1 data-testid="album-name">{songInfo.collectionName}</h1>
         <img src={ songInfo.artworkUrl100 } alt={ songInfo.collectionName } />
         <ol>
+          {loading && <Loading />}
           {songList.map((song) => (
             <li key={ song }>
               <MusicCard
                 song={ song }
                 favoritedSongs={ this.favoriteSongs }
-                gettingList={ favoritedSongs }
+                getList={ favoritedSongs }
 
               />
             </li>))}
@@ -62,7 +60,6 @@ class Album extends Component {
     );
   }
 }
-
 Album.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
