@@ -18,7 +18,7 @@ class Header extends Component {
     }, async () => {
       const test = await getUser();
       this.setState({
-        username: test.name,
+        username: test,
         ready: false,
       });
     });
@@ -27,11 +27,11 @@ class Header extends Component {
   render() {
     const { username, ready } = this.state;
     return (
-      <header testid="header-component">
+      <header data-testid="header-component">
         { ready ? (
           <Loading />
         ) : (
-          <h4 testid="header-user-name">{ username }</h4>
+          <h4 data-testid="header-user-name">{ username.name }</h4>
         )}
       </header>
     );
